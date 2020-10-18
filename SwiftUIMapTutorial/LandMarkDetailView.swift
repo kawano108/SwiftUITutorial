@@ -7,24 +7,27 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct LandMarkDetail: View {
+    
+    var landmark: Landmark
+    
     var body: some View {
         VStack {
-            MapView()
+            MapView(coordinate: landmark.locationCoordinate)
                 .edgesIgnoringSafeArea(.top)
                 .frame(height: 300)
             
-            CircleImageView().offset(y: -130)
+            CircleImageView(image: landmark.image).offset(y: -130)
                 .padding(.bottom, -130)
             
             VStack(alignment: .leading) {
-                Text("Turtle Rock")
+                Text(landmark.name)
                     .font(.title)
                 HStack {
-                    Text("ジョアツリー国立公園")
+                    Text(landmark.park)
                         .font(.subheadline)
                     Spacer()
-                    Text("カリフォルニア")
+                    Text(landmark.state)
                         .font(.subheadline)
                 }
             }
@@ -32,14 +35,14 @@ struct ContentView: View {
             
             Spacer()
         }
+        .navigationBarTitle(Text(landmark.name), displayMode: .inline)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ContentView()
-            ContentView()
+            LandMarkDetail(landmark: landmarkData[0])
         }
     }
 }

@@ -11,13 +11,13 @@ import SwiftUI
 struct SwiftUIMapTutorialApp: App {
     var body: some Scene {
         WindowGroup {
-            LandmarkList().environmentObject(UserData())
+            CategoryHome().environmentObject(UserData())
         }
     }
 }
 
 struct SwiftUIMapTutorialApp_Previews: PreviewProvider {
     static var previews: some View {
-        LandmarkList().environmentObject(UserData())
+        CategoryHome().environmentObject(UserData())
     }
 }

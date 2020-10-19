@@ -12,32 +12,28 @@ struct LandmarkList: View {
     @EnvironmentObject var userData: UserData
     
     var body: some View {
-        NavigationView {
-            List {
-                Toggle(isOn: $userData.showFavoriteOnly) {
-                    Text("Favorites Only")
-                }
-                
-                ForEach(userData.landmarks) { landmark in
-                    if !userData.showFavoriteOnly || landmark.isFavorite {
-                        NavigationLink(destination: LandMarkDetail(landmark: landmark)) {
-                            LandMarkRow(landmark: landmark)
-                        }
+        List {
+            Toggle(isOn: $userData.showFavoriteOnly) {
+                Text("Favorites Only")
+            }
+            
+            ForEach(userData.landmarks) { landmark in
+                if !userData.showFavoriteOnly || landmark.isFavorite {
+                    NavigationLink(destination: LandMarkDetail(landmark: landmark)) {
+                        LandMarkRow(landmark: landmark)
                     }
                 }
             }
-            .navigationBarTitle(Text("Landmarks"))
         }
+        .navigationBarTitle(Text("Landmarks"))
     }
 }
 
 struct LandmarkList_Previews: PreviewProvider {
     static var previews: some View {
-        
-        ForEach(["iPhone 8", "iPhone 11"], id: \.self) {
+        NavigationView {
             LandmarkList()
-                .previewDevice(PreviewDevice(rawValue: $0))
-                .previewDisplayName($0)
+                .environmentObject(UserData())
         }
     }
 }
